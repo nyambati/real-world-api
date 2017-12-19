@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const User = mongoose.model('User');
 
 const localStrategy = new Strategy(
-    { usernameField: user[email], passwordField: user[password] },
+    { usernameField: 'user[email]', passwordField: 'user[password]' },
     (email, password, done) => {
         return User.findOne({ email })
             .then(user => {
-                if (!user || !user.hasValidPassword(password)) {
+                if (!user || !user.validPassword(password)) {
                     return done(null, false, {
                         error: 'Invalid email or password'
                     })
