@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+const server = require('../server');
+
+const port = parseInt(process.env.PORT) || '3000';
+
+if (isNaN(port) || !port) throw new Error(`Invalid port : Port should be a number > 0 < 65536 recieved '${port}'`);
+
+
+server.listen(port, error => {
+    if (error) throw error;
+    return console.log(`Server Running on port ${port}`)
+});
